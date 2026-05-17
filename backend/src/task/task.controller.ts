@@ -12,36 +12,36 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { Priority, Status } from '../generated/prisma/enums';
 
-@Controller('task')
+@Controller('tasks')
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
+  // Get all tasks /tasks
+  @Get()
+  findAll() {
+    return this.taskService.findAll();
+  }
   // Create task /task
   @Post()
   create(@Body() createTaskDto: CreateTaskDto) {
     return this.taskService.create(createTaskDto);
   }
-  // Get all tasks /task
-  @Get()
-  findAll() {
-    return this.taskService.findAll();
-  }
-  // Get one task /task/:id
+  // Get one task /tasks/:id
   @Get(':id')
   findOne(@Param('id') id: string) {
     console.log(+id);
     return this.taskService.findOne(+id);
   }
-  // Gat tasks by status /task/:status
+  // Get tasks by status /task/status/:status
   @Get('status/:status')
   findByStatus(@Param('status') status: Status) {
     return this.taskService.findByStatus(status);
   }
-  // Update __Patch__ status /task/:id/:status
+  // Update __Patch__ status /tasks/status/:id/:status
   @Patch('status/:id/:status')
   updateStatus(@Param('id') id: string, @Param('status') status: Status) {
     return this.taskService.updateByStatus(+id, status);
   }
-  // Gat tasks by priority /task/priority/:priority
+  // Get tasks by priority /task/priority/:priority
   @Get('priority/:priority')
   findByPriority(@Param('priority') priority: Priority) {
     return this.taskService.findByPriority(priority);
