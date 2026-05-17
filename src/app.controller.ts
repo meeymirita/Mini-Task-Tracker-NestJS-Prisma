@@ -1,9 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
+import 'dotenv/config';
+
 @Controller()
 export class AppController {
-  // constructor(private readonly userService: UsersService) {}
   @Get('/')
   startPage() {
+    console.log(process.env.DATABASE_URL);
     return 'Hello World!';
   }
 }

@@ -2,22 +2,32 @@ generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
 }
-
 datasource db {
   provider = "sqlite"
 }
-
 model task {
   id          Int      @id @default(autoincrement())
   title       String
   description String
-  status      String   @default("todo")
-  priority    String   @default("low")
+  status      Status   @default(todo)
+  priority    Priority @default(low)
   createdAt   DateTime @default(now())
 }
-
-// status: названачана | в процессе | Выполнена | Дефолт назначана
-// status:'todo'|'in_progress'|'done'
-
-// priority: низкий | средний | высокий | Дефолт низкий
-// priority:'low'|'medium'|'high'
+// Дефолт назначана
+enum Status {
+  // Названачана
+  todo
+  // В процессе
+  in_progress
+  // Выполнена
+  done
+}
+// Дефолт низкий
+enum Priority {
+  // низкий
+  low
+  // средний
+  medium
+  // высокий
+  high
+}
