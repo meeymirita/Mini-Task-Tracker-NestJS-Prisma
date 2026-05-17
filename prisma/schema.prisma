@@ -7,8 +7,17 @@ datasource db {
   provider = "sqlite"
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model task {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  status      String   @default("todo")
+  priority    String   @default("low")
+  createdAt   DateTime @default(now())
 }
+
+// status: названачана | в процессе | Выполнена | Дефолт назначана
+// status:'todo'|'in_progress'|'done'
+
+// priority: низкий | средний | высокий | Дефолт низкий
+// priority:'low'|'medium'|'high'
